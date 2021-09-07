@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+// import './App.css';
+import React, {useState} from 'react';
+import Display from './components/display';
+import ButtonPanel from './components/ButtonPanel';
+import calculate from "./operations/calculate";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+	const initialState = {
+		total: null,
+		next: null,
+		operation: null,
+	};
+
+	const [state, setState] = useState(initialState);	
+	const { total, next, operation } = state;
+	
+	const handleClick = (buttonValue) => {
+		const calculator = calculate(state, buttonValue);
+		setState({ ...calculator });
+	};
+
+	const result = next ? next && next.toString() : total && total.toString();
+
+	return (
+		<div className="App">
+			<div className="calculator">
+				<Display result={result} />
+				<div className="buttons">
+					<ButtonPanel handleClick={handleClick}/>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default App;
