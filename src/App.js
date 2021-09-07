@@ -1,11 +1,10 @@
 // import './App.css';
 import React, {useState} from 'react';
 import Display from './components/display';
-import ButtonPanel from './components/ButtonPanel';
-import calculate from "./operations/calculate";
+import ButtonPanel from './components/buttonPanel';
+import calculate from './operations/calculate';
 
 function App() {
-
 	const initialState = {
 		total: null,
 		next: null,
@@ -13,7 +12,7 @@ function App() {
 	};
 
 	const [state, setState] = useState(initialState);	
-	const { total, next, operation } = state;
+	const { total, next} = state;
 	
 	const handleClick = (buttonValue) => {
 		const calculator = calculate(state, buttonValue);
